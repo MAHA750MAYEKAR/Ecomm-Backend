@@ -23,6 +23,6 @@ const UserSchema=new mongoose.Schema({
             default:"customer",
             enum:["customer","admin"]//what is enum
       }
-})
+},{timestamps:true})
 
 export const User=mongoose.model("User",UserSchema)
