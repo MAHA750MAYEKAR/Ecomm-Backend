@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const UserSchema=new mongoose.Schema({
       name:{
@@ -24,5 +25,15 @@ const UserSchema=new mongoose.Schema({
             enum:["customer","admin"]//what is enum
       }
 },{timestamps:true})
+
+
+UserSchema.pre('save', function saveUser(next) {
+      const user = this;
+      const SALT = bcrypt.genSaltSync(9);
+      const hashedPassword = bcrypt.hashSync(user.password, SALT);
+      user.password = hashedPassword;
+      next();
+    });
+
 
 export const User=mongoose.model("User",UserSchema)
