@@ -7,14 +7,15 @@ export const validator=(zodSchema)=>{
                   next();
                   
             } catch (error) {
-                  console.log("zod validation error");
+                  console.log("zod validation error",error.errors);
                   
-                  return res.status(StatusCodes.BAD_REQUEST).json({
-                        success:"false",
-                        message:"Validation failed",
-                        Error:"Zod validation Error"
-
-                  })                  
+                  
+        
+                    return res.status(StatusCodes.BAD_REQUEST).json({
+                        success: false,
+                        message: "zod Validation failed",
+                        errors: error.errors   // Include detailed validation errors
+                    });                
             }
       }
 

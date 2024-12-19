@@ -4,7 +4,7 @@ import { createUserService } from "../service/userService.js";
 export const createUserSignupController=async function(req,res){
       try {
             const newUser=await createUserService(req.body)
-            console.log(req.body);
+      
             
             if (!newUser) {
                   throw{
