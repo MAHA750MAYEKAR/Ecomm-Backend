@@ -12,4 +12,8 @@ export const userResository={
             const updatedUser=await User.findByIdAndUpdate(userId,data,{new:true})
             return updatedUser
       },
+      findUserByEmail:async function(email){
+            const user=await User.findOne({email})
+            return user
+      }
 }
