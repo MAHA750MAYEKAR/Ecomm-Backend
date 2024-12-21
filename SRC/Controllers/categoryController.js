@@ -3,7 +3,15 @@ import { createCategory } from "../service/categoryService.js";
 
 export const createCategoryController = async (req, res) => {
       try {
-            const response = await createCategory(req.body)
+            console.log("here is req.body",req.body);
+            const data={
+                  ...req.body,
+                  userId:req.user
+            }
+        
+            
+           
+            const response = await createCategory(data)
             if (!response) {
                   throw {
                         success: false,

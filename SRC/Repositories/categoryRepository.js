@@ -2,7 +2,7 @@ import { Category } from "../Schema/categorySchema.js"
 export const categoryRepository = {
       createCategory: async (data) => {
             const category = await Category.create(data)
-            return category
+            return category.populate("userId", "name userTypes");
       },
       deleteCategory: async (id) => {
             const category = await Category.findByIdAndDelete(id)
