@@ -43,6 +43,14 @@ export const authMiddleware = async (req, res, next) => {
                   })
 
             }
+            const isUserAdmin=isUserValid==="admin"
+            if(!isUserAdmin){
+                  return res.status(StatusCodes.FORBIDDEN).json({
+                        success: false,
+                        message: 'User is not an admin',
+                  })
+
+            }
 
             req.user = isUserValid.id
             next()
