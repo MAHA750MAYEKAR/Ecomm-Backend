@@ -14,10 +14,20 @@ export const authMiddleware = async (req, res, next) => {
                   })
 
             }
-            const varifyToken = JWT.verify(TOKEN, JWT_SECRETE)
-        
+            let verifyToken;
+            try {
+                  verifyToken = JWT.verify(TOKEN, JWT_SECRETE);
+                  console.log("jwt secrete",JWT_SECRETE);
+                  
+            } catch (error) {
+                  return res.status(StatusCodes.FORBIDDEN).json({
+                        success: false,
+                        message: 'Invalid or expired Token provided by the Client',
+                  });
+            }
 
-            if (!varifyToken) {
+
+            if (!verifyToken) {
                   return res.status(StatusCodes.FORBIDDEN).json({
                         success: false,
                         message: 'Invalid Token provided by the Client',
@@ -25,7 +35,7 @@ export const authMiddleware = async (req, res, next) => {
 
             }
 
-            const isUserValid = await User.findById(varifyToken.id)
+            const isUserValid = await User.findById(verifyToken.id)
             if (!isUserValid) {
                   return res.status(StatusCodes.FORBIDDEN).json({
                         success: false,
