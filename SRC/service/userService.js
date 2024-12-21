@@ -91,8 +91,8 @@ export const userSignInService=async function(data){
             throw{
                   success: false,
                   status: StatusCodes.BAD_REQUEST,
-                  message: "error in sign in controller",
-                  explanation:"Password is incorrect please try again"
+                  message: "error in sign in service",
+                 
             }
             
       }
